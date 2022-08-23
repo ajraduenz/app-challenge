@@ -1,11 +1,23 @@
-import React from 'react';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./Components/Header";
+import Main from "./Components/Main";
+import Dashboard from "./Components/Main/Dashboard";
 
-function App() {
+type Props = {};
+
+const App = (props: Props) => {
   return (
-    <div className="App">
-      
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Main />} />
+      </Routes>
+      <Routes>
+        <Route path="/dashboard/:id" element={<Dashboard registeredUser=""/>} />
+      </Routes>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
