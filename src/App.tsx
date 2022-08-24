@@ -11,10 +11,10 @@ export const App = (props: Props) => {
   const [url, setUrl] = React.useState("");
   React.useEffect(() => {
     const matchUrl = document.cookie.match(
-      new RegExp("(^| )" + "url" + "=([^;]+)"),
+      new RegExp("(^| )url=([^;]+)"),
     );
     const matchName = document.cookie.match(
-      new RegExp("(^| )" + "name" + "=([^;]+)"),
+      new RegExp("(^| )name=([^;]+)"),
     );
 
     if (matchName && matchUrl) {
