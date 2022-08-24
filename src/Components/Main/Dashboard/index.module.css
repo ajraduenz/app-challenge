@@ -1,0 +1,16 @@
+.error{
+  color: rgb(170, 17, 17);
+  width: 100%;
+  text-align: center;
+}
+.buttons{
+  display: flex;
+  flex-direction: column;
+  padding:1rem;
+  row-gap: 1rem;  
+  column-gap: 1rem;
+  max-width: 200px;
+}
+.button{
+  padding:0.5rem 0;
+}

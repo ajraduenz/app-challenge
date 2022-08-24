@@ -1,0 +1,24 @@
+.modal{
+  max-width: 500px;
+  border:2px solid #fff;
+  padding: 1rem;
+  margin: 2rem auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.buttonClose{
+  position: absolute;
+  border:2px solid #fff;
+  padding: 0.25rem 0.5rem;
+  top:1rem;
+  right:1rem;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+.error{
+  color: rgb(170, 17, 17);
+  width: 100%;
+  text-align: center;
+}

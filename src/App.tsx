@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./Components/Header";
 import Dashboard from "./Components/Main/Dashboard";
 import NewUser from "./Components/Main/NewUser";
 
@@ -8,6 +7,7 @@ type Props = {};
 
 export const App = (props: Props) => {
   const [registeredUser, setRegisteredUser] = React.useState("");
+  const [registeredEmail, setRegisteredEmail] = React.useState("");
   const [error, setError] = React.useState("");
   const [url, setUrl] = React.useState("");
   React.useEffect(() => {
@@ -17,14 +17,13 @@ export const App = (props: Props) => {
     const matchName = document.cookie.match(
       new RegExp("(^| )" + "name" + "=([^;]+)"),
     );
+
     if (matchName && matchUrl) {
       setRegisteredUser(matchName[2]);
-      setUrl(matchUrl[2]);    
-      // document.cookie.split(";").forEach(function (c) {
-      //   document.cookie = c
-      //     .replace(/^ +/, "")
-      //     .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-      // });
+      setUrl(matchUrl[2]);
+      document.cookie = "url=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      document.cookie =
+        "name=;  Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
     }
   }, []);
 
@@ -38,16 +37,24 @@ export const App = (props: Props) => {
     }
     return result;
   }
-  const registerUser = (user: string): void => {
+  const registerUser = (user: string, email: string): void => {
     if (
-      user.toLowerCase().match(/^[a-z]([-']?[a-z]+)*( [a-z]([-']?[a-z]+)*)+$/)
+      user
+        .toLowerCase()
+        .match(/^[a-z]([-']?[a-z]+)*( [a-z]([-']?[a-z]+)*)+$/) &&
+      email
+        .toLowerCase()
+        .match(
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+        )
     ) {
+      console.log(user);
       setRegisteredUser(user);
       const randomUrl = makeid(5);
       document.cookie = `url=${randomUrl}`;
       document.cookie = `name=${user}`;
+      document.cookie = `email=${email}`;
       setUrl(`/dashboard/${randomUrl}`);
-      window.location.pathname = `/dashboard/${randomUrl}`;
       if (error !== "") {
         setError("");
       }
@@ -55,20 +62,42 @@ export const App = (props: Props) => {
       setError("Por favor, verifique seu cadastro");
     }
   };
+  const deleteUser = (): void => {
+    setUrl("");
+    setRegisteredUser("");
+    setError("");
+    document.cookie = "url=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    document.cookie = "name=;  Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    document.cookie = "email=;  Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    window.location.pathname = "/";
+  };
+
+  function editUser(newUser: string) {
+    setRegisteredUser(newUser);
+    document.cookie = `name=${newUser}`;
+  }
 
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
         <Route
           path="/"
-          element={<NewUser registerUser={registerUser} error={error} />}
+          element={
+            <NewUser registerUser={registerUser} url={url} error={error} />
+          }
         />
       </Routes>
       <Routes>
         <Route
           path={`/dashboard/${url}`}
-          element={<Dashboard registeredUser={registeredUser} />}
+          element={
+            <Dashboard
+              registeredUser={registeredUser}
+              editUser={editUser}
+              deleteUser={deleteUser}
+              error={error}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>
