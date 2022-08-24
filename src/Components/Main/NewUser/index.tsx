@@ -3,10 +3,12 @@ import styles from "./index.module.css";
 
 type Props = {
   registerUser: (user: string) => void;
+  error: string
 };
 
-const NewUser = ({ registerUser }: Props) => {
+const NewUser = ({ registerUser, error }: Props) => {
   const [name, setName] = useState("");
+
   return (
     <div>
       <form>
@@ -29,6 +31,7 @@ const NewUser = ({ registerUser }: Props) => {
           </button>
         </div>
       </form>
+      {error && <div className={styles.error}>{error}</div>}
     </div>
   );
 };
