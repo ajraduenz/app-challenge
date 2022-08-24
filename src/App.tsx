@@ -10,7 +10,6 @@ export const App = (props: Props) => {
   const [registeredUser, setRegisteredUser] = React.useState("");
   const [error, setError] = React.useState("");
   const [url, setUrl] = React.useState("");
-  const [invalidLink, setInvalidLink] = React.useState(false);
   React.useEffect(() => {
     const matchUrl = document.cookie.match(
       new RegExp("(^| )" + "url" + "=([^;]+)"),
@@ -20,14 +19,12 @@ export const App = (props: Props) => {
     );
     if (matchName && matchUrl) {
       setRegisteredUser(matchName[2]);
-      setUrl(matchUrl[2]);
-    } else {
-      document.cookie.split(";").forEach(function (c) {
-        document.cookie = c
-          .replace(/^ +/, "")
-          .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
-      });
-      setInvalidLink(true);
+      setUrl(matchUrl[2]);    
+      // document.cookie.split(";").forEach(function (c) {
+      //   document.cookie = c
+      //     .replace(/^ +/, "")
+      //     .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+      // });
     }
   }, []);
 
@@ -71,12 +68,7 @@ export const App = (props: Props) => {
       <Routes>
         <Route
           path={`/dashboard/${url}`}
-          element={
-            <Dashboard
-              registeredUser={registeredUser}
-              invalidLink={invalidLink}
-            />
-          }
+          element={<Dashboard registeredUser={registeredUser} />}
         />
       </Routes>
     </BrowserRouter>

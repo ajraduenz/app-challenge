@@ -8,7 +8,6 @@ type Props = {
 
 const NewUser = ({ registerUser, error }: Props) => {
   const [name, setName] = useState("");
-
   return (
     <div>
       <form>
