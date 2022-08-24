@@ -7,7 +7,6 @@ type Props = {};
 
 export const App = (props: Props) => {
   const [registeredUser, setRegisteredUser] = React.useState("");
-  const [registeredEmail, setRegisteredEmail] = React.useState("");
   const [error, setError] = React.useState("");
   const [url, setUrl] = React.useState("");
   React.useEffect(() => {
