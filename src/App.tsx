@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Dashboard from "./Components/Main/Dashboard";
-import NewUser from "./Components/Main/NewUser";
+import Dashboard from "./Components/Dashboard";
+import NewUser from "./Components/NewUser";
+import NotFound from "./Components/NotFound";
 
 type Props = {};
 
@@ -10,12 +11,8 @@ export const App = (props: Props) => {
   const [error, setError] = React.useState("");
   const [url, setUrl] = React.useState("");
   React.useEffect(() => {
-    const matchUrl = document.cookie.match(
-      new RegExp("(^| )url=([^;]+)"),
-    );
-    const matchName = document.cookie.match(
-      new RegExp("(^| )name=([^;]+)"),
-    );
+    const matchUrl = document.cookie.match(new RegExp("(^| )url=([^;]+)"));
+    const matchName = document.cookie.match(new RegExp("(^| )name=([^;]+)"));
 
     if (matchName && matchUrl) {
       setRegisteredUser(matchName[2]);
@@ -75,6 +72,7 @@ export const App = (props: Props) => {
     setRegisteredUser(newUser);
     document.cookie = `name=${newUser}`;
   }
+  console.log("url", url);
 
   return (
     <BrowserRouter>
@@ -86,7 +84,7 @@ export const App = (props: Props) => {
           }
         />
         <Route
-          path={`/dashboard/${url}`}
+          path={`/dashboard-${url}`}
           element={
             <Dashboard
               registeredUser={registeredUser}
@@ -96,7 +94,8 @@ export const App = (props: Props) => {
             />
           }
         />
-      </Routes>      
+        <Route path="*" element={<NotFound/>} />
+      </Routes>
     </BrowserRouter>
   );
 };

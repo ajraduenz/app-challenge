@@ -17,14 +17,15 @@ const NewUser = ({ registerUser, error, url }: Props) => {
   }
   return (
     <div>
+      <h1>Novo usuário</h1>
       {url ? (
         <div>
           <h2>Olá, {name}</h2>
           <h2>Seu email é: {email}</h2>
           <p>Segue seu link de acesso:</p>
           <strong>
-            <a href={window.location.origin + "/dashboard/" + url}>
-              {window.location.origin + "/dashboard/" + url}
+            <a href={window.location.origin + "/dashboard-" + url}>
+              {window.location.origin + "/dashboard-" + url}
             </a>
           </strong>
           <p>* Expira após o primeiro acesso</p>
