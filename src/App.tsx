@@ -17,7 +17,7 @@ export const App = (props: Props) => {
     if (matchName && matchUrl) {
       setRegisteredUser(matchName[2]);
 
-      if (window.location.href.indexOf("dashboard-" + matchUrl[2]) != -1) {
+      if (window.location.href.indexOf("dashboard-" + matchUrl[2]) !== -1) {
         setUrl(matchUrl[2]);
         const randomUrl = makeid(5);
         console.log("CUUU");
