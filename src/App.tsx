@@ -53,7 +53,7 @@ export const App = (props: Props) => {
       document.cookie = `url=${randomUrl}`;
       document.cookie = `name=${user}`;
       document.cookie = `email=${email}`;
-      setUrl(`/dashboard/${randomUrl}`);
+      setUrl(`${randomUrl}`);
       if (error !== "") {
         setError("");
       }

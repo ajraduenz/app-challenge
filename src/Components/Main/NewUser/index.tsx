@@ -23,8 +23,8 @@ const NewUser = ({ registerUser, error, url }: Props) => {
           <h2>Seu email é: {email}</h2>
           <p>Segue seu link de acesso:</p>
           <strong>
-            <a href={window.location.origin + url}>
-              {window.location.origin + url}
+            <a href={window.location.origin + "/dashboard/" + url}>
+              {window.location.origin + "/dashboard/" + url}
             </a>
           </strong>
           <p>* Expira após o primeiro acesso</p>
@@ -49,7 +49,7 @@ const NewUser = ({ registerUser, error, url }: Props) => {
               onChange={(e) => setEmail(e.target.value)}
             />
             <button
-            className={styles.button}
+              className={styles.button}
               onClick={(e) => {
                 sendToCookie(e);
               }}
@@ -59,7 +59,6 @@ const NewUser = ({ registerUser, error, url }: Props) => {
           </div>
         </form>
       )}
-
       {error && <div className={styles.error}>{error}</div>}
     </div>
   );
