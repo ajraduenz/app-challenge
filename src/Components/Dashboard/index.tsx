@@ -11,7 +11,7 @@ type Props = {
 const Dashboard = ({ registeredUser, editUser, error, deleteUser }: Props) => {
   const [modalEdit, setModalEdit] = React.useState(false);
   return (
-    <div>
+    <div className={styles.dashboard}>
       <h1>Dashboard</h1>
       <strong>Bem vindo, {registeredUser}</strong>
       <div className={styles.buttons}>
@@ -29,7 +29,7 @@ const Dashboard = ({ registeredUser, editUser, error, deleteUser }: Props) => {
             deleteUser();
           }}
         >
-          Excluir usuário dos cookies
+          Excluir usuário
         </button>
         {modalEdit && (
           <EditUser setModalEdit={setModalEdit} editUser={editUser} />

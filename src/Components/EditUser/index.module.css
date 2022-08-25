@@ -1,11 +1,24 @@
 .modal{
-  max-width: 500px;
-  border:2px solid #fff;
+  top:0;
+  bottom: 0;
+  right: 0;
+  left:0;
   padding: 1rem;
   margin: 2rem auto 0 auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  background:#0000006b;
+}
+.popUp{
   position: relative;
+  max-width: 500px;
+  padding:2rem;
+  border:2px solid #fff;
+  display: flex;
+  flex-direction: column;
 }
 .buttonClose{
   position: absolute;
@@ -21,4 +34,10 @@
   color: rgb(170, 17, 17);
   width: 100%;
   text-align: center;
+}
+.input{
+  margin:1rem 0
+}
+.button{
+  padding:0.5rem 0.25rem
 }

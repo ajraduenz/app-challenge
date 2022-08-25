@@ -16,7 +16,7 @@ const NewUser = ({ registerUser, error, url }: Props) => {
     registerUser(name, email);
   }
   return (
-    <div>
+    <div className={styles.containerInput}>
       <h1>Novo usuário</h1>
       {url ? (
         <div>
@@ -32,7 +32,7 @@ const NewUser = ({ registerUser, error, url }: Props) => {
         </div>
       ) : (
         <form>
-          <div className={styles.containerInput}>
+          <div className={styles.formInput}>
             <label htmlFor="name">Nome Completo:</label>
             <input
               type="text"

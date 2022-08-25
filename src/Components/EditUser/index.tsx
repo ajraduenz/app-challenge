@@ -24,29 +24,33 @@ const EditUser = ({ editUser, setModalEdit }: Props) => {
   }
   return (
     <div className={styles.modal}>
-      <div
-        className={styles.buttonClose}
-        onClick={() => setModalEdit((c) => !c)}
-      >
-        X
+      <div className={styles.popUp}>
+        <div
+          className={styles.buttonClose}
+          onClick={() => setModalEdit((c) => !c)}
+        >
+          X
+        </div>
+        <h2>Editar usuário</h2>
+        <label htmlFor="name">Editar nome completo:</label>
+        <input
+          className={styles.input}
+          type="text"
+          id="name"
+          name="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <button
+         className={styles.button}
+          onClick={() => {
+            changeName();
+          }}
+        >
+          Confirmar
+        </button>
+        {error && <div className={styles.error}>{error}</div>}
       </div>
-      <h2>Editar usuário</h2>
-      <label htmlFor="name">Editar Nome Completo:</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <button
-        onClick={() => {
-          changeName();
-        }}
-      >
-        Confirmar
-      </button>
-      {error && <div className={styles.error}>{error}</div>}
     </div>
   );
 };

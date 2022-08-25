@@ -4,6 +4,10 @@
   display: flex;
   flex-direction: column;
 }
+.formInput{
+  display: flex;
+  flex-direction: column;
+}
 .error{
   color: rgb(170, 17, 17);
   width: 100%;
