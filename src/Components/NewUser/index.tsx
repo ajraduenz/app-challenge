@@ -3,11 +3,12 @@ import styles from "./index.module.css";
 
 type Props = {
   registerUser: (user: string, email: string) => void;
+  registeredUser: string;
   error: string;
   url: string;
 };
 
-const NewUser = ({ registerUser, error, url }: Props) => {
+const NewUser = ({ registerUser, error, url, registeredUser }: Props) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
@@ -20,8 +21,7 @@ const NewUser = ({ registerUser, error, url }: Props) => {
       <h1>Novo usuário</h1>
       {url ? (
         <div>
-          <h2>Olá, {name}</h2>
-          <h2>Seu email é: {email}</h2>
+          <h2>Olá, {registeredUser}</h2>
           <p>Segue seu link de acesso:</p>
           <strong>
             <a href={window.location.origin + "/dashboard-" + url}>

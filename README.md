@@ -1,5 +1,8 @@
 npm start
 
+Access via:
+https://challenge-react-aldo.netlify.app/
+
 ###Challenge
 ---Requisitos
 RF001 - Permitir acesso ao sistema através de link de uso único.

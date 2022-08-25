@@ -9,17 +9,24 @@ export const App = (props: Props) => {
   const [registeredUser, setRegisteredUser] = React.useState("");
   const [error, setError] = React.useState("");
   const [url, setUrl] = React.useState("");
+  const [newUrl, setNewUrl] = React.useState("");
   React.useEffect(() => {
     const matchUrl = document.cookie.match(new RegExp("(^| )url=([^;]+)"));
     const matchName = document.cookie.match(new RegExp("(^| )name=([^;]+)"));
 
     if (matchName && matchUrl) {
       setRegisteredUser(matchName[2]);
-      setUrl(matchUrl[2]);
-      document.cookie = "url=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-      document.cookie =
-        "name=;  Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+
+      if (window.location.href.indexOf("dashboard-" + matchUrl[2]) != -1) {
+        setUrl(matchUrl[2]);
+        const randomUrl = makeid(5);
+        console.log("CUUU");
+        document.cookie = `url=${randomUrl}; Path=/;`;
+        setNewUrl(randomUrl);
+        console.log(matchUrl[2], randomUrl);
+      }
     }
+   
   }, []);
 
   function makeid(length: number) {
@@ -43,13 +50,12 @@ export const App = (props: Props) => {
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         )
     ) {
-      console.log(user);
       setRegisteredUser(user);
       const randomUrl = makeid(5);
       document.cookie = `url=${randomUrl}`;
       document.cookie = `name=${user}`;
       document.cookie = `email=${email}`;
-      setUrl(`${randomUrl}`);
+      setUrl(randomUrl);
       if (error !== "") {
         setError("");
       }
@@ -57,6 +63,7 @@ export const App = (props: Props) => {
       setError("Por favor, verifique seu cadastro");
     }
   };
+
   const deleteUser = (): void => {
     setUrl("");
     setRegisteredUser("");
@@ -78,7 +85,12 @@ export const App = (props: Props) => {
         <Route
           path="/"
           element={
-            <NewUser registerUser={registerUser} url={url} error={error} />
+            <NewUser
+              registeredUser={registeredUser}
+              registerUser={registerUser}
+              url={url}
+              error={error}
+            />
           }
         />
         <Route
@@ -89,6 +101,7 @@ export const App = (props: Props) => {
               editUser={editUser}
               deleteUser={deleteUser}
               error={error}
+              newUrl={newUrl}
             />
           }
         />
