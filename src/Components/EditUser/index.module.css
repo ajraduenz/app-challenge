@@ -19,6 +19,8 @@
   border:2px solid #fff;
   display: flex;
   flex-direction: column;
+  transform: translateY(-50%);
+  background: blueviolet;
 }
 .buttonClose{
   position: absolute;

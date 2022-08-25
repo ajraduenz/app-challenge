@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "./Components/Dashboard";
 import NewUser from "./Components/NewUser";
-import NotFound from "./Components/NotFound";
 
 type Props = {};
 
@@ -72,7 +71,6 @@ export const App = (props: Props) => {
     setRegisteredUser(newUser);
     document.cookie = `name=${newUser}`;
   }
-  console.log("url", url);
 
   return (
     <BrowserRouter>
@@ -94,7 +92,6 @@ export const App = (props: Props) => {
             />
           }
         />
-        <Route path="*" element={<NotFound/>} />
       </Routes>
     </BrowserRouter>
   );
