@@ -85,8 +85,6 @@ export const App = (props: Props) => {
             <NewUser registerUser={registerUser} url={url} error={error} />
           }
         />
-      </Routes>
-      <Routes>
         <Route
           path={`/dashboard/${url}`}
           element={
@@ -98,7 +96,7 @@ export const App = (props: Props) => {
             />
           }
         />
-      </Routes>
+      </Routes>      
     </BrowserRouter>
   );
 };
